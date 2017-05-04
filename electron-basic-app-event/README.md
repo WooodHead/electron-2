@@ -1,6 +1,4 @@
-# 퀵 스타트 & 이벤트 콘솔 확인
-
-# electron-quick-start
+# Electron-quick-start and Check basic-app-event
 
 **Clone and run for a quick way to see Electron in action.**
 
