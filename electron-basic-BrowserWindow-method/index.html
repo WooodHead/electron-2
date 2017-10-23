@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BrowserWindow method</title>
+</head>
+<body>
+    <button id="btn_current">current</button>
+    <button id="btn_all">all</button>
+
+    <script>
+    const {remote} = require('electron');
+    const {BrowserWindow} = remote;
+
+    const btnCurrent = document.querySelector('#btn_current');
+    const btnAll = document.querySelector('#btn_all');
+
+    btnCurrent.addEventListener('click', () => {
+        const current = BrowserWindow.getFocusedWindow();
+        alert(current.id);
+    });
+    btnAll.addEventListener('click', () => {
+        const all = BrowserWindow.getAllWindows();
+        const ids = all.map(win => win.id);
+        alert(ids);
+    });
+    </script>
+</body>
+</html>
