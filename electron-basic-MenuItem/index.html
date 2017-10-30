@@ -34,7 +34,7 @@
 
         menu.insert(1, separator);
 
-        window.addEventListener('contextmenu', e => {//contentmenu 우측마우스클릭
+        window.addEventListener('contextmenu', e => {//contextmenu 우측마우스클릭
             console.log('contextmenu');
             e.preventDefault();
             menu.popup(BrowserWindow.getFousedWindow);
