@@ -14,6 +14,10 @@
     "electron": "^1.7.9"
   },
   "dependencies": {
-    "photonkit": "^0.1.2"
+    "fs": "0.0.1-security",
+    "get-title": "^1.0.1",
+    "path": "^0.12.7",
+    "photonkit": "^0.1.2",
+    "superagent": "^3.8.1"
   }
 }

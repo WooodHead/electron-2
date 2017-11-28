@@ -1,21 +1,11 @@
-const {app, BrowserWindow} = require('electron');
-const data = [
-    {
-        type: 'home',
-        url: 'https://github.com',
-        title: '타이틀'
-    },
-    {
-        type: 'home',
-        url: 'https://github.com',
-        title: '타이틀'
-    },
-    {
-        type: 'github',
-        url: 'https://github.com',
-        title: '타이틀'
-    }
-];//Array
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
+const request = require('superagent');//module import
+const getTitle = require('get-title');
+const fs = require('fs');
+const path = require('path');
+const DATA_PATH = path.join(__dirname, './data.json');
+
+const data = JSON.parse(fs.readFileSync(DATA_PATH).toString())//Array
 
 app.on('ready', () => {
     const win = new BrowserWindow({
@@ -28,6 +18,31 @@ app.on('ready', () => {
     win.loadURL(`file://${__dirname}/index.html`);
     win.once('ready-to-show', () => {//맨처음 한번만 부르게 되므로 on이 아닌 once로 처리함
         win.show();
-        win.webContents.send('update', data);
+        win.webContents.send('update', data);//update-채널
     })
-})
+
+    ipcMain.on('paste', (event, item) => {
+        if (item.url.indexOf('http://') > -1 || item.url.indexOf('https://') > -1) {
+            const type = item.type;
+            const url = item.url;
+            request.get(url)
+                .end((err, response) => {
+                    const contents = response.res.text;
+                    getTitle(contents).then(title => {
+                        data.push({type, url, title});
+                        fs.writeFileSync(DATA_PATH, JSON.stringify(data));
+                        win.webContents.send('update', data);
+                    });
+                });
+
+        } else {
+            dialog.showErrorBox('경고', '유효한 URL이 아닙니다.');
+        }
+    });
+
+    ipcMain.on('remove', (event, removeId) => {
+        data.splice(removeId, 1);
+        fs.writeFileSync(DATA_PATH, JSON.stringify(data));
+        win.webContents.send('update', data);
+    });
+});
