@@ -1,0 +1,25 @@
+{
+  "name": "electron-basic-Bookmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . --overwrite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-packager": "^10.1.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "get-title": "^1.0.1",
+    "path": "^0.12.7",
+    "photonkit": "^0.1.2",
+    "superagent": "^3.8.1"
+  }
+}
