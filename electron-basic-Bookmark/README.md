@@ -36,3 +36,16 @@ nodejs에서 파일과 디렉토리에 관련된 작업을 할 수 있게 하는
 
 ### path
 파일의 경로를 다루기 위한 코어 모듈
+
+## Step04
+### Tray
+### Menu
+### clipboard
+
+### electron-packager
+실행파일을 만들기 위한 플러그인
+
+* npm script
+````json
+    "pack": "electron-packager . --overwrite"
+````
